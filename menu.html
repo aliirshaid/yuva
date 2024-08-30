@@ -1,0 +1,424 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Yuva Menu" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
+  <style>
+    @font-face {
+      font-family: "fontspring";
+      src: url("./assets/font/fontspring_medium.otf");
+      font-weight: medium;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "fontspring";
+      src: url("./assets/font/fontspring-bold.otf");
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    .root {
+      margin: auto;
+      max-width: 390px;
+    }
+
+    ul.CategoriesNav.sticky {
+      scroll-behavior: smooth;
+      position: sticky;
+      top: 0;
+      /* Set the desired position when the element becomes sticky */
+    }
+
+    body {
+      margin: 0;
+      background-color: #050707;
+      font-family: "fontspring", serif;
+      font-weight: medium;
+    }
+
+    ul.CategoriesNav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      overflow-x: scroll;
+      background-color: #000;
+      width: 100%;
+      max-width: 390px;
+      display: flex;
+      white-space: nowrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    ul.CategoriesNav li a {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      text-decoration: none;
+    }
+
+    ul.CategoriesNav li a.active {
+      color: black;
+      background-color: #fab217;
+      border-bottom: 2px solid white;
+    }
+    
+    /* scroll */
+
+    ul.CategoriesNav::-webkit-scrollbar {
+      width: 0em;
+      height: 0em;
+    }
+
+    ul.CategoriesNav::-webkit-scrollbar-track {
+      margin-block: 0em;
+    }
+
+    ul.CategoriesNav::-webkit-scrollbar-thumb {
+      background: transparent;
+      /* border-radius: 100vw; */
+    }
+
+    ul.CategoriesNav::-webkit-scrollbar-thumb:hover {
+      background: transparent;
+    }
+
+    .CategoryContent {
+      width: 100%;
+      display: block;
+    }
+
+    .switch {
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    .switch>span {
+      position: absolute;
+      top: 12px;
+      pointer-events: none;
+      font-size: 14px;
+      width: 50%;
+      text-align: center;
+    }
+
+    input.check-toggle-round-flat:checked~.off {
+      color: #fff;
+    }
+
+    input.check-toggle-round-flat:checked~.on {
+      color: #fff;
+    }
+
+    .switch>span.on {
+      left: 0;
+      padding-left: 2px;
+      color: #fff;
+      font-family: "fontspring";
+      font-weight: medium;
+    }
+
+    .switch>span.off {
+      right: 0;
+      padding-right: 14px;
+      color: #fff;
+      text-align: right;
+      font-family: "cairo";
+      font-weight: bold;
+    }
+
+    .check-toggle {
+      position: absolute;
+      margin-left: -9999px;
+      visibility: hidden;
+    }
+
+    .check-toggle+label {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+    }
+
+    input.check-toggle-round-flat+label {
+      padding: 2px;
+      width: 130px;
+      height: 35px;
+      background-color: #000;
+      border-radius: 60px;
+    }
+
+    input.check-toggle-round-flat+label:before,
+    input.check-toggle-round-flat+label:after {
+      display: block;
+      position: absolute;
+      content: "";
+    }
+
+    input.check-toggle-round-flat+label:before {
+      top: 2px;
+      left: 2px;
+      bottom: 2px;
+      right: 2px;
+      background-color: #000;
+      border-radius: 100px;
+    }
+
+    input.check-toggle-round-flat+label:after {
+      top: 4px;
+      left: 4px;
+      bottom: 4px;
+      width: 60px;
+      background-color: #fab217;
+      border-radius: 52px;
+      transition: margin 0.2s;
+    }
+
+    input.check-toggle-round-flat:checked+label:after {
+      margin-left: 65px;
+    }
+  </style>
+  <title>Yuva</title>
+</head>
+
+<body>
+  <!-- HTML CODE -->
+  <div id="root" class="root">
+    <div class="CategoriesContent">
+      <img src="./assets/images/header.png" style="width: 100%; display: block" id="logo" data-anchor="logo" />
+    </div>
+    <div>
+      <center>
+        <div class="switch">
+          <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
+            onclick="didToggleLanguageSwitcher()" />
+          <label for="language-toggle"></label>
+          <span class="on">English</span>
+          <span class="off">العربية</span>
+        </div>
+      </center>
+    </div>
+    <ul class="CategoriesNav" id="stickyNav">
+      <li><a href="#fresh_juice" class="active">FRESH JUICE</a></li>
+      <li><a href="#milkshakes">MILKSHAKES</a></li>
+      <li><a href="#iced_coffee">ICED COFFEE</a></li>
+      <li><a href="#chillers">CHILLERS</a></li>
+      <li><a href="#coffee_drinks">COFFEE DRINKS</a></li>
+      <li><a href="#hot_drinks">HOT DRINKS</a></li>
+      <li><a href="#desserts">DESSERTS</a></li>
+      <li><a href="#hookah">HOOKAH</a></li>
+      <li><a href="#sandwiches">SANDWICHES</a></li>
+      <li><a href="#salads">SALADS</a></li>
+      <li><a href="#main_courses">MAIN COURSES</a></li>
+      <li><a href="#pasta">PASTA</a></li>
+      <li><a href="#appetizers">APPETIZERS</a></li>
+    </ul>
+    <div class="CategoriesContent">
+      <img src="./assets/images/en/fresh_juice.png" class="CategoryContent" id="fresh_juice"
+        data-anchor="fresh_juice" /><img src="./assets/images/en/milkshakes.png" class="CategoryContent" id="milkshakes"
+        data-anchor="milkshakes" /><img src="./assets/images/en/iced_coffee.png" class="CategoryContent"
+        id="iced_coffee" data-anchor="iced_coffee" /><img src="./assets/images/en/chillers.png" class="CategoryContent"
+        id="chillers" data-anchor="chillers" /><img src="./assets/images/en/coffee_drinks.png" class="CategoryContent"
+        id="coffee_drinks" data-anchor="coffee_drinks" /><img src="./assets/images/en/hot_drinks.png"
+        class="CategoryContent" id="hot_drinks" data-anchor="hot_drinks" /><img src="./assets/images/en/desserts.png"
+        class="CategoryContent" id="desserts" data-anchor="desserts" /><img src="./assets/images/en/hookah.png"
+        class="CategoryContent" id="hookah" data-anchor="hookah" /><img src="./assets/images/en/sandwiches.png"
+        class="CategoryContent" id="sandwiches" data-anchor="sandwiches" /><img src="./assets/images/en/salads.png"
+        class="CategoryContent" id="salads" data-anchor="salads" /><img src="./assets/images/en/main_courses.png"
+        class="CategoryContent" id="main_courses" data-anchor="main_courses" /><img src="./assets/images/en/pasta.png"
+        class="CategoryContent" id="pasta" data-anchor="pasta" /><img src="./assets/images/en/appetizers.png"
+        class="CategoryContent" id="appetizers" data-anchor="appetizers" />
+    </div>
+  </div>
+  <script>
+
+    // Images path
+    const imagesPath = "./assets/images/";
+    let navHeight;
+    let isAnimating;
+
+
+    let currentLanguage = "en";
+
+    function activateCategoryItem(element) {
+      // Remove the "active" class from all anchor elements
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.classList.remove("active");
+      });
+
+      // Add the "active" class to the clicked anchor element
+      element.classList.add("active");
+    }
+
+    // Function to handle the click event on anchor elements
+    function didClickCategoryItem(category) {
+      const clickedAnchor = category.target;
+
+      // Activate category item
+      activateCategoryItem(category.target);
+
+      // Scroll to the corresponding section smoothly
+      const element = document.querySelector(
+        clickedAnchor.getAttribute("href")
+      );
+
+      const y = element.getBoundingClientRect().top + window.scrollY + navHeight + 1;
+      console.log(navHeight)
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      category.preventDefault();
+    }
+
+    function didToggleLanguageSwitcher() {
+      if (this.currentLanguage == "en") {
+        this.currentLanguage = "ar";
+      } else {
+        this.currentLanguage = "en";
+      }
+
+      document
+        .querySelectorAll(".CategoryContent")
+        .forEach((element, index) => {
+          element.src =
+            imagesPath + this.currentLanguage + "/" + element.id + ".png";
+        });
+
+    }
+
+    function didScrollVertically() {
+      if (window.pageYOffset > 260) {
+        document.querySelector(".CategoriesNav").classList.add("sticky");
+      } else {
+        document.querySelector(".CategoriesNav").classList.remove("sticky");
+      }
+
+      this.validateCategoriesNav()
+    }
+
+    // Dom content loaded listener
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // Set default values
+      this.currentLanguage = "en";
+      this.isAnimating = false;
+      
+      // Generate content
+      this.calculateNavHeight();
+
+      // Attach event listeners
+      this.attachEventListeners();
+    });
+
+    // Function to generate the HTML content dynamically
+    function calculateNavHeight() {
+
+      //calculate the nav height
+      let CategoriesNav = document.querySelector(".CategoriesNav");
+      navHeight = -CategoriesNav.offsetHeight;
+    }
+
+    function isAtBottom() {
+      // Check if reached the bottom of the page
+      var scrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+      var windowHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+      var pageHeight = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      );
+
+
+      if (scrollPosition + windowHeight >= pageHeight) {
+        // Reached the bottom of the page
+        return true;
+        // Perform any actions you need when reaching the bottom
+      }
+
+      return false;
+    }
+
+    var previousScrollPosition = window.pageYOffset;
+
+    function validateCategoriesNav() {
+
+      var navLinks = document.querySelectorAll(".CategoriesNav a");
+
+      if (isAtBottom()) {
+        activateCategoryItem(navLinks[navLinks.length - 1]);
+        return;
+      }
+
+      var categories = document.querySelectorAll(".CategoryContent");
+
+      for (var i = 0; i < categories.length; i++) {
+        var category = categories[i];
+        var categoryTop = category.offsetTop + navHeight;
+
+        var categoryHeight = category.offsetHeight;
+        var categoryAnchor = category.getAttribute("data-anchor");
+        var navLink = document.querySelector(
+          'a[href="#' + categoryAnchor + '"]'
+        );
+
+        if (
+          window.pageYOffset >= categoryTop &&
+          window.pageYOffset < categoryTop + categoryHeight
+        ) {
+
+          // Determine scrolling direction
+          var currentScrollPosition = window.pageYOffset;
+          var isScrollingDown = currentScrollPosition > previousScrollPosition;
+          previousScrollPosition = currentScrollPosition;
+
+          activateCategoryItem(navLink);
+
+          scrollCategoriesNavToItem(navLink, isScrollingDown);
+        }
+      }
+    }
+
+    // activeElement,isScrollingDown
+    function scrollCategoriesNavToItem(activeElement, isScrollingDown) {
+
+      // Selectors
+      var navBarContainer = document.querySelector(".CategoriesNav");
+
+      // calculations
+      const navBarRect = navBarContainer.getBoundingClientRect();
+      const activeElementRect = activeElement.getBoundingClientRect();
+
+      // Scrolling
+      navBarContainer.scrollTo({ left: activeElementRect.left + navBarContainer.scrollLeft - navBarRect.left, behavior: "instant" });
+    }
+
+    // Attach the event listener to anchor elements
+    function attachEventListeners() {
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", didClickCategoryItem);
+      });
+
+      // Did vertically scroll listener
+      window.addEventListener("scroll", didScrollVertically);
+    }
+  </script>
+</body>
+
+</html>
